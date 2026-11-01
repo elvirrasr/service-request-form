@@ -1,0 +1,252 @@
+# service-request-form[index.html](https://github.com/user-attachments/files/34232954/index.html)
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Service Request Form – Fault List</title>
+<style>
+:root{--bg:#e9edf2;--paper:#fff;--ink:#111;--line:#111;--field:#eef1fb;--accent:#1b6fb5;--muted:#555;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c2026;--muted:#aab}}
+:root[data-theme="dark"]{--bg:#1c2026;--muted:#aab}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:14px/1.35 "Segoe UI",Calibri,Arial,sans-serif;color:var(--ink);padding:12px}
+.bar{max-width:860px;margin:0 auto 10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:var(--ink)}
+.bar button{font:inherit;padding:8px 14px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:6px;cursor:pointer}
+.bar button.alt{background:transparent;color:var(--accent)}
+.bar span{font-size:12px;color:var(--muted)}
+.paper{max-width:860px;margin:0 auto;background:var(--paper);color:#111;border:2px solid var(--line)}
+.sec{border-top:2px solid var(--line);padding:6px 8px}
+.sec:first-child{border-top:0}
+h1{margin:0;font-size:18px}
+.head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.brand{font-weight:700;margin-top:14px}
+.logoimg{height:56px;width:auto;max-width:100%;display:block}
+h2{margin:0 0 4px;font-size:13px}
+.grid{display:grid;gap:3px 6px}
+.areas{grid-template-columns:repeat(5,1fr)}
+.equip{grid-template-columns:repeat(7,1fr)}
+label.c{display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;min-height:24px}
+input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);flex:none}
+.ref{display:flex;gap:10px;flex-wrap:wrap;font-size:12px}
+.refrow{display:flex;align-items:center;gap:3px;margin-top:2px}
+input[type=text],textarea{font:inherit;background:var(--field);border:1px solid #c9d0e6;color:#111;padding:5px 6px;border-radius:2px;width:100%}
+.refrow input{width:54px;text-align:center;padding:5px 2px}
+textarea{min-height:110px;resize:vertical}
+.rep{display:grid;grid-template-columns:auto 1fr auto 1.6fr auto 140px;gap:6px;align-items:center;font-size:13px}
+.rc{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rctext{height:auto;min-height:200px;resize:none}
+.linkbox{border:1px solid #c9d0e6;background:var(--field);padding:8px;font-size:13px;color:#111;word-break:break-word}
+.linkbox a{color:#1b6fb5;font-weight:700;text-decoration:underline}
+.sign{display:grid;grid-template-columns:1.6fr 1fr;border-top:2px solid var(--line)}
+.sign>div{padding:6px 8px}
+.sign>div+div{border-left:2px solid var(--line)}
+.staff{display:grid;grid-template-columns:repeat(4,1fr);gap:6px 10px;margin-top:6px}
+.nm{background:transparent!important;border:0;border-bottom:1px dotted #555;border-radius:0;padding:2px;width:100%;min-width:60px}
+.chk{display:grid;grid-template-columns:92px 1fr;gap:6px;align-items:center;margin-bottom:5px;font-size:13px}
+.foot{max-width:860px;margin:6px auto 0;text-align:right;font-size:11px;color:var(--muted)}
+@media (max-width:720px){
+.areas{grid-template-columns:repeat(2,1fr)}.equip{grid-template-columns:repeat(2,1fr)}
+.staff{grid-template-columns:repeat(2,1fr)}
+.rep{grid-template-columns:auto 1fr}.rc{grid-template-columns:1fr}.sign{grid-template-columns:1fr}
+.sign>div+div{border-left:0;border-top:2px solid var(--line)}.head{flex-direction:column}}
+@media print{
+:root{padding:0}body{background:#fff;padding:0}.bar{display:none}.paper{border-width:1.5px;max-width:none}
+input[type=text],textarea{background:#fff}textarea{resize:none}.sec,.sign{break-inside:avoid}
+.foot{color:#333}
+@page{size:A4;margin:8mm}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+</head>
+<body>
+<div class="bar">
+  <button id="dl">Download PDF (bisa diisi)</button>
+  <button id="print" class="alt">Cetak</button>
+  <button id="reset" class="alt">Kosongkan form</button>
+  <span>PDF hasil download bisa diisi, dan link foto Google Drive bisa diklik.</span>
+</div>
+
+<form class="paper" onsubmit="return false">
+  <div class="sec head">
+    <div><h1>SERVICE REQUEST FORM – FAULT LIST</h1><div class="brand">Marine Safari Bali</div><div style="margin-top:4px;font-size:13px">No. Urut: <b id="docNo">otomatis saat Download</b></div></div>
+    <img class="logoimg" alt="Marine Safari Bali" src="data:image/png;base64,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">
+  </div>
+
+  <div class="sec">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:12px">
+      <div><h2>Area:</h2><div class="grid areas" id="areas"></div></div>
+      <div class="ref" style="flex-direction:column">
+        <div>Report Reference No:<div class="refrow">MSB/ENG/TSH/<input type="text" aria-label="TSH 1"> / <input type="text" aria-label="TSH 2"> / <input type="text" aria-label="TSH 3"></div></div>
+        <div><div class="refrow">MSB/ENG/SVC/<input type="text" aria-label="SVC 1"> / <input type="text" aria-label="SVC 2"> / <input type="text" aria-label="SVC 3"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Equipment/Utility Type:</h2>
+    <div class="grid equip" id="equip"></div>
+    <h2 style="margin-top:8px">Other:</h2>
+    <input type="text" aria-label="Other">
+  </div>
+
+  <div class="sec"><h2>Faulty Issue:</h2><textarea aria-label="Faulty issue"></textarea></div>
+
+  <div class="sec">
+    <h2>Reported by:</h2>
+    <div class="rep">
+      <b>Name:</b><input type="text" aria-label="Name">
+      <b>Designation:</b><input type="text" aria-label="Designation">
+      <b>Date:</b><input type="text" id="date" aria-label="Date">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Root Cause:</h2>
+    <div class="rc">
+      <div class="rctext linkbox">
+        <b>Foto Root Cause:</b><br>
+         Upload foto ke folder Google Drive dengan menambahkan folder baru sesuai dengan kerusakan yang dimiliki, ubah judul folder dan judul picture pada kerusakan dengan meng-klik link ini:<br><br>
+        <a href="https://drive.google.com/drive/folders/1SCevOaSKMk4CH8Dl9C4_J4Y6ErXbmGrL?usp=drive_link" target="_blank" rel="noopener">Buka folder foto (Google Drive)</a>
+      </div>
+      <textarea class="rctext" aria-label="Root cause (teks)"></textarea>
+    </div>
+  </div>
+
+  <div class="sec"><h2>Rectification Done:</h2><textarea aria-label="Rectification done"></textarea></div>
+
+  <div class="sign">
+    <div><h2 style="text-align:center">Rectified by:</h2><div class="staff" id="staff"></div></div>
+    <div>
+      <div class="chk"><b>Checked by:</b><input type="text" aria-label="Checked by"></div>
+      <div class="chk"><b>Designation:</b><input type="text" aria-label="Checked by designation"></div>
+      <div class="chk"><b>Date:</b><input type="text" aria-label="Checked by date"></div>
+    </div>
+  </div>
+</form>
+<div class="foot">MSB/FL/ENG/211026/v2</div>
+
+<script>
+var DRIVE_URL="https://drive.google.com/drive/folders/1SCevOaSKMk4CH8Dl9C4_J4Y6ErXbmGrL?usp=drive_link";
+var COUNTER_URL="https://script.google.com/macros/s/AKfycbxlvc_S2fUKIKC4gpxD_CStvdEc9w877qzjiypRVE82ycs0KQLIEHGlAjdgKG_ILyWfCw/exec";
+var AREAS=["Plaza","Sealion","Rocky Shores Toilet","Penguin","Tunnel","Dolphin Show","Encounter Facility","Education Center","Prep. Kitchen","Lab & Hospital","Marine BOH","Ara Cafe","Pachamaya","Jungle Odyssey","Varuna","Estuary","River Cafe","Plaza Toilet","Theater Tank","Employee Facility","PR1","PR2","PR3","PR4","SWS"];
+var EQUIP=["Light","Light Switch","Power Outlet","AC","Fan","Exhaust Fan","Freezer","Chiller","Door Panel","Door Lock/Key","Door Hinges","Door Handle","Door Closer","Water Tap","Jet Shower","Shower Hose","Hand Dryer","Soap Dispenser","Floor Drain","Closet","Urinal","Concrete Floor","Wooden Floor","Wall","Hand Rail","Roof","Ceiling/Plafond","Pipe"];
+var STAFF=["Arief","Nopayana","Rizal","Sulfiqra","Taufik","Deni","Alif","Faiz","Adam","Yoga"];
+function fill(id,list){document.getElementById(id).innerHTML=list.map(function(t){var s=document.createElement('span');s.textContent=t;return '<label class="c"><input type="checkbox"> '+s.innerHTML+'</label>'}).join('')}
+fill('areas',AREAS);fill('equip',EQUIP);fill('staff',STAFF);
+for(var k=0;k<2;k++){document.getElementById('staff').insertAdjacentHTML('beforeend','<label class="c"><input type="checkbox"> <input type="text" class="nm" aria-label="Nama staf lain"></label>');}
+
+var d=new Date();
+document.getElementById('date').value=('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear();
+
+document.getElementById('print').addEventListener('click',function(){window.print()});
+document.getElementById('reset').addEventListener('click',function(){
+  if(!confirm('Kosongkan semua isian?'))return;
+  document.querySelector('form').reset();
+});
+
+async function makePdf(){
+  if(!window.PDFLib){alert('Gagal memuat pdf-lib. Pastikan ada internet, lalu coba lagi.');return}
+  var noStr;
+  try{
+    var resp=await fetch(COUNTER_URL,{cache:'no-store'});
+    var js=await resp.json();
+    noStr=String(js.no).padStart(4,'0');
+  }catch(e){alert('Gagal mengambil nomor urut. Pastikan internet aktif, lalu coba lagi.');return}
+  document.getElementById('docNo').textContent=noStr;
+  var P=PDFLib,rgb=P.rgb,doc=await P.PDFDocument.create();
+  doc.setTitle('Service Request Form - Fault List');
+  var page=doc.addPage([595.28,841.89]);
+  var H=await doc.embedFont(P.StandardFonts.Helvetica),HB=await doc.embedFont(P.StandardFonts.HelveticaBold);
+  var form=doc.getForm(),K=rgb(0,0,0),FIELD=rgb(.933,.945,.984),FB=rgb(.79,.816,.902),BLUE=rgb(.106,.435,.71);
+  var L=30,R=565,W=535,TOP=812,BOT=108;
+  var q=function(s){return document.querySelector(s)};
+  var v=function(l){var e=q('[aria-label="'+l+'"]');return e?e.value:''};
+  function T(s,x,y,sz,b){page.drawText(s,{x:x,y:y,size:sz||8,font:b?HB:H,color:K})}
+  function Ln(x1,y1,x2,y2){page.drawLine({start:{x:x1,y:y1},end:{x:x2,y:y2},thickness:1.1,color:K})}
+  function CB(name,x,y,label,on,fs){var f=form.createCheckBox(name);f.addToPage(page,{x:x,y:y,width:8,height:8,borderColor:K,borderWidth:.8,backgroundColor:rgb(1,1,1)});if(on)f.check();if(label)T(label,x+12,y+1.5,fs||6.8)}
+  function TF(name,x,y,w,h,val,multi,fs){var f=form.createTextField(name);if(multi)f.enableMultiline();f.setText(val||'');f.addToPage(page,{x:x,y:y,width:w,height:h,borderColor:FB,borderWidth:.6,backgroundColor:FIELD,textColor:K,font:H});f.setFontSize(fs||8)}
+  var nm=function(t){return t.replace(/\W+/g,'_')};
+
+  page.drawRectangle({x:L,y:BOT,width:W,height:TOP-BOT,borderColor:K,borderWidth:1.4});
+  [770,680,582,500,464,266,196].forEach(function(y){Ln(L,y,R,y)});
+  Ln(405,196,405,BOT);
+
+  T('SERVICE REQUEST FORM – FAULT LIST',L+5,796,12,1);T('Marine Safari Bali',L+5,777,9,1);
+  T('No. Urut: '+noStr,L+140,777,9,1);
+  try{var li=await doc.embedPng(q('.logoimg').src),lw=36.8*li.width/li.height;page.drawImage(li,{x:R-6-lw,y:TOP-37,width:lw,height:36.8})}catch(e){}
+
+  T('Area:',L+4,759,8,1);
+  var ac=document.querySelectorAll('#areas input'),firstArea='';
+  AREAS.forEach(function(t,i){var on=!!(ac[i]&&ac[i].checked);if(on&&!firstArea)firstArea=t;CB('area_'+nm(t),L+5+(i%5)*78,744-Math.floor(i/5)*14,t,on)});
+  T('Report Reference No:',L+392,759,7);
+  [['MSB/ENG/TSH/','TSH',736],['MSB/ENG/SVC/','SVC',708]].forEach(function(r){
+    T(r[0],L+392,r[2]+4,7);
+    for(var j=0;j<3;j++){var x=L+444+j*30;TF('ref_'+r[1]+'_'+(j+1),x,r[2],24,14,v(r[1]+' '+(j+1)),0,7);if(j<2)T('/',x+25,r[2]+4,7)}
+  });
+
+  T('Equipment/Utility Type:',L+4,671,8,1);
+  var ec=document.querySelectorAll('#equip input');
+  EQUIP.forEach(function(t,i){CB('equip_'+nm(t),L+5+(i%7)*76,653-Math.floor(i/7)*14,t,!!(ec[i]&&ec[i].checked))});
+  T('Other:',L+4,595,8,1);TF('other',L+36,590,W-42,13,v('Other'));
+
+  T('Faulty Issue:',L+4,573,8,1);TF('faulty_issue',L+4,505,W-8,62,v('Faulty issue'),1,9);
+
+  T('Reported by:',L+4,491,8,1);
+  T('Name:',L+4,471,8,1);TF('name',L+34,467,130,14,v('Name'));
+  T('Designation:',L+180,471,8,1);TF('designation',L+240,467,140,14,v('Designation'));
+  T('Date:',L+400,471,8,1);TF('date',L+426,467,105,14,v('Date'));
+
+  T('Root Cause:',L+4,455,8,1);
+  var bx=L+4,by=272,bw=262,bh=176;
+  page.drawRectangle({x:bx,y:by,width:bw,height:bh,color:FIELD,borderColor:FB,borderWidth:.8});
+  var lbEl=q('.linkbox'),
+      lbTitle=lbEl.querySelector('b').textContent,
+      lbLink=lbEl.querySelector('a'),
+      lbLinkTxt=lbLink.textContent,
+      lbInfo=lbEl.textContent.replace(lbTitle,'').replace(lbLinkTxt,'').replace(/\s+/g,' ').trim();
+  T(lbTitle,bx+8,by+bh-18,9,1);
+  var words=lbInfo.split(' '),lines=[],cur='';
+  words.forEach(function(w){
+    var t=cur?cur+' '+w:w;
+    if(H.widthOfTextAtSize(t,8.5)>bw-16&&cur){lines.push(cur);cur=w}else cur=t;
+  });
+  if(cur)lines.push(cur);
+  var ty=by+bh-34;
+  lines.forEach(function(ln){T(ln,bx+8,ty,8.5);ty-=11});
+  ty-=10;
+  page.drawText(lbLinkTxt,{x:bx+8,y:ty,size:10,font:HB,color:BLUE});
+  var lkw=HB.widthOfTextAtSize(lbLinkTxt,10);
+  page.drawLine({start:{x:bx+8,y:ty-2},end:{x:bx+8+lkw,y:ty-2},thickness:.8,color:BLUE});
+  var ctx=doc.context;
+  var link=ctx.obj({Type:'Annot',Subtype:'Link',Rect:[bx,by,bx+bw,by+bh],Border:[0,0,0],F:4,
+    A:{Type:'Action',S:'URI',URI:P.PDFString.of(lbLink.href)}});
+  page.node.addAnnot(ctx.register(link));
+
+  TF('root_cause',L+4+bw+5,by,W-8-bw-5,bh,v('Root cause (teks)'),1,9);
+
+  T('Rectification Done:',L+4,257,8,1);TF('rectification',L+4,201,W-8,50,v('Rectification done'),1,9);
+
+  T('Rectified by:',(L+405)/2-HB.widthOfTextAtSize('Rectified by:',8)/2,184,8,1);
+  var sc=document.querySelectorAll('#staff label.c');
+  sc.forEach(function(lb,i){
+    var x=L+6+(i%4)*93,y=163-Math.floor(i/4)*21;
+    var cbx=lb.querySelector('input[type=checkbox]'),on=!!(cbx&&cbx.checked);
+    if(i<STAFF.length)CB('staff_'+nm(STAFF[i]),x,y,STAFF[i],on,7.5);
+    else{var nmEl=lb.querySelector('.nm');CB('staff_other_'+(i-STAFF.length+1),x,y,'',on);TF('staff_other_name_'+(i-STAFF.length+1),x+12,y-2,70,12,nmEl?nmEl.value:'',0,7)}
+  });
+  [['Checked by:','Checked by','checked_by',165],['Designation:','Checked by designation','checked_designation',142],['Date:','Checked by date','checked_date',119]].forEach(function(r){
+    T(r[0],410,r[3]+4,8,1);TF(r[2],468,r[3],92,14,v(r[1]));
+  });
+  var code='MSB/FL/ENG/211026/v2';
+  page.drawText(code,{x:R-H.widthOfTextAtSize(code,7),y:BOT-10,size:7,font:H,color:rgb(.27,.27,.27)});
+
+  var bytes=await doc.save();
+  var fname=('SRF_'+noStr+'_'+(firstArea||'form')+'_'+(v('Date')||'').replace(/\//g,'-')+'.pdf').replace(/[^\w.\-]+/g,'_');  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));a.download=fname;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},8000);
+}
+document.getElementById('dl').addEventListener('click',function(){makePdf().catch(function(e){alert('Gagal membuat PDF: '+e.message)})});
+</script>
+</body>
+</html>
